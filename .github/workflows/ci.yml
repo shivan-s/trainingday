@@ -1,5 +1,5 @@
 ---
-name: Main
+name: CI
 
 on:
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
       - name: Deploy
         run: npx wrangler d1 execute trainingday --file="./db/schema.sql"
 
-  main:
+  workers:
     strategy:
       matrix:
         worker: ["list"]
@@ -50,17 +50,25 @@ jobs:
           node-version: 18
 
       - name: Update npm, install dependencies of worker
+        run: npm update -g npm
+
+      - name: Build
         run: |
-          npm update -g npm
           cd ./${{ matrix.worker }}
-          npm install ci
+          npm ci
 
       - name: Run tests
-        run: npx vitest
+        run: |
+          cd ./${{ matrix.worker }}
+          npm test
 
       - name: Deploy (dry run)
-        run: npx wrangler publish ${{ matrix.worker }}/src/index.ts --config="${{ matrix.worker }}/wrangler.toml" --dry-run
+        run: |
+          cd ./${{ matrix.worker }}
+          npm dry-run
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
-        run: npx wrangler publish ${{ matrix.worker }}/src/index.ts --config="${{ matrix.worker }}/wrangler.toml"
+        run: |
+          cd ./${{ matrix.worker }}
+          npm deploy
