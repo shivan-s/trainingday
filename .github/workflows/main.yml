@@ -1,0 +1,62 @@
+---
+name: Main
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  db:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "DB Deployment"
+        run: echo "Running..."
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Run npm and install dependencies
+        run: |
+          npm update -g npm
+          npm install -g wrangler
+
+      - name: Deploy
+        run: npx wrangler d1 execute trainingday --file="./db/schema.sql"
+
+  main:
+    strategy:
+      matrix:
+        worker: ["list"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "${{ matrix.worker }} Deployment"
+        run: echo "Running..."
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Run npm and install dependencies
+        run: |
+          npm update -g npm
+          npm install -g wrangler vitest
+
+      - name: Run tests
+        run: npx vitest
+
+      - name: Deploy (dry run)
+        run: npx wrangler publish ${{ matrix.worker }}/src/index.ts --config="${{ matrix.worker }}/wrangler.toml" --dry-run
+
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        run: npx wrangler publish ${{ matrix.worker }}/src/index.ts --config="${{ matrix.worker }}/wrangler.toml"

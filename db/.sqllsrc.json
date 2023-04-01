@@ -1,0 +1,7 @@
+{
+  "name": "training-day",
+  "adapter": "sqlite3",
+  "projectPaths": [
+    ".."
+  ]
+}
