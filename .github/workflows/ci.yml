@@ -35,7 +35,7 @@ jobs:
   workers:
     strategy:
       matrix:
-        worker: ["list"]
+        worker: ["list", "get"]
     runs-on: ubuntu-latest
     steps:
       - name: "${{ matrix.worker }} Deployment"
