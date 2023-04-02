@@ -66,10 +66,10 @@ jobs:
       - name: Deploy (dry run)
         run: |
           cd ./${{ matrix.worker }}
-          npm dry-run
+          npm run dry-run
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         run: |
           cd ./${{ matrix.worker }}
-          npm deploy
+          npm run deploy
