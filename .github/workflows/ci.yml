@@ -34,6 +34,7 @@ jobs:
 
   workers:
     strategy:
+      fail-fast: false
       matrix:
         worker: ["list", "get"]
     runs-on: ubuntu-latest
