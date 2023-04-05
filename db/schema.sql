@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS trainingdays (
     notes TEXT
 );
 
-INSERT OR IGNORE INTO trainingdays (id, notes) VALUES (1, 'Sample');
 
 CREATE TABLE IF NOT EXISTS exercises (
     id INT PRIMARY KEY,
@@ -14,8 +13,16 @@ CREATE TABLE IF NOT EXISTS exercises (
     ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+INSERT OR IGNORE INTO trainingdays (id, notes) VALUES (1, 'Sample One');
+
 INSERT OR IGNORE INTO exercises (id, name, trainingday) VALUES (1, 'Snatch', 1),
 (2, 'Clean and Jerk', 1);
+
+INSERT OR IGNORE INTO trainingdays (id, notes) VALUES (2, 'Sample Two');
+
+INSERT OR IGNORE INTO exercises (id, name, trainingday) VALUES (
+    3, 'Back Squat', 2
+);
 
 --
 -- CREATE TABLE IF NOT EXISTS exercisesets (

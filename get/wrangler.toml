@@ -3,7 +3,11 @@ main = "src/index.ts"
 compatibility_date = "2023-03-31"
 workers_dev = false
 tsconfig = "tsconfig.json"
-routes = [{ pattern = "*.trainingday.shivan.xyz", zone_id = "shivan.xyz" }]
+
+routes = [
+  { pattern = "trainingday.shivan.xyz/td/*", zone_name = "shivan.xyz" },
+  { pattern = "td.shivan.xyz/*", zone_name = "shivan.xyz" },
+]
 
 [[ d1_databases ]]
 binding = "DB"
