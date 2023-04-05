@@ -1,7 +1,7 @@
 name = "list"
 main = "src/index.ts"
 compatibility_date = "2023-03-31"
-workers_dev = false
+workers_dev = true
 tsconfig = "tsconfig.json"
 route = { pattern = "trainingday.shivan.xyz", zone_name = "shivan.xyz", custom_domain = true }
 
