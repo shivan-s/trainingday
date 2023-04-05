@@ -1,0 +1,18 @@
+name = "get"
+main = "src/index.ts"
+compatibility_date = "2023-03-31"
+workers_dev = true
+tsconfig = "tsconfig.json"
+
+routes = [
+  { pattern = "get.training.shivan.xyz", zone_name = "shivan.xyz", custom_domain = true },
+  { pattern = "get.td.shivan.xyz", zone_name = "shivan.xyz", custom_domain = true },
+  { pattern = "get.trainingday.shivan.xyz/*", zone_name = "shivan.xyz" },
+  { pattern = "get.td.shivan.xyz/*", zone_name = "shivan.xyz" },
+]
+
+[[ d1_databases ]]
+binding = "DB"
+database_name = "trainingday"
+database_id = "952ded9f-3edc-4275-bcc4-97decd5a6f56"
+preview_database_id = "408a81e2-33fb-4ef9-88e6-9b19a986ccfa"
