@@ -5,8 +5,10 @@ workers_dev = false
 tsconfig = "tsconfig.json"
 
 routes = [
-  { pattern = "trainingday.shivan.xyz/td/*", zone_name = "shivan.xyz", custom_domain = true },
-  { pattern = "td.shivan.xyz/*", zone_name = "shivan.xyz", custom_domain = true },
+  { pattern = "trainingday.shivan.xyz", zone_name = "shivan.xyz", custom_domain = true },
+  { pattern = "td.shivan.xyz", zone_name = "shivan.xyz", custom_domain = true },
+  { pattern = "trainingday.shivan.xyz/*", zone_name = "shivan.xyz" },
+  { pattern = "td.shivan.xyz/*", zone_name = "shivan.xyz" },
 ]
 
 [[ d1_databases ]]
