@@ -1,4 +1,4 @@
-import { TrainingDay } from "../types";
+import { TrainingDay } from "./types";
 
 export interface Env {
   DB: D1Database;
